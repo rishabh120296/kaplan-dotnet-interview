@@ -1,12 +1,16 @@
 # Kaplan .NET Developer Interview Challenge
 
-## Recommended Tools
+## Instructions
+- Fork this repo and execute the Code Tasks and commit the changes to your fork.
+- Provide a link to your fork on GitHub for review prior to the first interview.
 
-* Visual Studio 2019 - The Community Edition is available for you to use for individual use.
+
+## Recommended Tools
+- Visual Studio 2019 - The Community Edition is available for you to use for individual use.
 
 ## System Notes
-* The project contains an in memory database. Modification of the classes in WebApiTest.Data is not required.
-* Orders have both an ordering customer and can contain multiple students tied to each item ordered.
+- The project contains an in memory database. Modification of the classes in WebApiTest.Data is not required.
+- Orders have both an ordering customer and can contain multiple students tied to each item ordered.
 
 ## Code Tasks
 1. Find and fix the following bugs in the REST API:
