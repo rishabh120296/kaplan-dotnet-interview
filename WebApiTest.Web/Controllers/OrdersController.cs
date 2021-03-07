@@ -11,13 +11,13 @@ using WebApiTest.Services;
 namespace WebApiTest.Web.Controllers
 {
     [ApiController]
-    [Route( "[controller]" )]
+    [Route("[controller]")]
     public class OrdersController : ControllerBase
     {
         private readonly IOrderItemsService _orderItemsService;
         private readonly ILogger<OrdersController> _logger;
 
-        public OrdersController( IOrderItemsService orderItemsService, ILogger<OrdersController> logger )
+        public OrdersController(IOrderItemsService orderItemsService, ILogger<OrdersController> logger)
         {
             _logger = logger;
             _orderItemsService = orderItemsService;
@@ -30,9 +30,17 @@ namespace WebApiTest.Web.Controllers
         /// <returns></returns>
         [Route("{orderID:int}")]
         [HttpGet]
-        public OrderItemsModel Get( int orderID )
+        public IActionResult Get(int orderID)
         {
-            return _orderItemsService.Get( orderID );
+            var orderItems = _orderItemsService.Get(orderID);
+            if (orderItems == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(orderItems);
+            }
         }
 
         /// <summary>
@@ -43,15 +51,15 @@ namespace WebApiTest.Web.Controllers
         /// <returns></returns>
         [Route("{orderID:int}")]
         [HttpPost]
-        public Task<short> Post( int orderID, OrderItemModel item )
+        public Task<short> Post(int orderID, OrderItemModel item)
         {
             try
             {
-                return _orderItemsService.AddAsync( orderID, item );
+                return _orderItemsService.AddAsync(orderID, item);
             }
-            catch ( ValidationException ve )
+            catch (ValidationException ve)
             {
-                throw new BadHttpRequestException( ve.Message );
+                throw new BadHttpRequestException(ve.Message);
             }
         }
     }
