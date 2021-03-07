@@ -8,5 +8,6 @@ namespace WebApiTest.Services
     {
         Task<short> AddAsync(int orderID, OrderItemModel item);
         OrderItemsModel Get(int orderID);
+        int Delete(int orderID, int lineNumber);
     }
 }

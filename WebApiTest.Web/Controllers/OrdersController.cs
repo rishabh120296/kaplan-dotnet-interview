@@ -62,5 +62,26 @@ namespace WebApiTest.Web.Controllers
                 throw new BadHttpRequestException(ve.Message);
             }
         }
+
+        /// <summary>
+        ///     Deletes an item to an order
+        /// </summary>
+        /// <param name="orderID"></param>
+        /// <param name="lineNumber">Item Number</param>
+        /// <returns></returns>
+        [Route("{orderID:int}/{lineNumber:int}")]
+        [HttpDelete]
+        public IActionResult Delete(int orderID, int lineNumber)
+        {
+            var deletedItem = _orderItemsService.Delete(orderID, lineNumber);
+            if (deletedItem == 0)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok();
+            }
+        }
     }
 }

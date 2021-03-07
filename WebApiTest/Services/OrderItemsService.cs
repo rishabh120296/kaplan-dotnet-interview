@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -57,6 +58,18 @@ namespace WebApiTest.Services
 
             await testDbContext.SaveChangesAsync();
 
+            return lineNumber;
+        }
+
+        public int Delete(int orderID, int lineNumber)
+        {
+            var orderItem = testDbContext.OrderItems.Where(oi => oi.OrderID == orderID && oi.LineNumber == lineNumber).FirstOrDefault();
+            if(orderItem == null)
+            {
+                return 0;
+            }
+            testDbContext.Entry(orderItem).State = EntityState.Deleted;
+            testDbContext.SaveChanges();
             return lineNumber;
         }
 
