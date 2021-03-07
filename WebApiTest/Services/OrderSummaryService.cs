@@ -29,6 +29,7 @@ namespace WebApiTest.Services
                 summary = new OrderSummaryModel()
                 {
                     OrderID = orderID,
+                    OrderingPersonID = order.OrderingPersonID,
                     Totals = new OrderTotalsModel()
                     {
                         Shipping = Shipping
@@ -46,9 +47,6 @@ namespace WebApiTest.Services
                 summary.Totals.SubTotal = subTotal;
                 summary.Totals.Tax = subTotal * TaxRate;
                 summary.Totals.Shipping = Shipping;
-
-                summary.OrderingPersonID = personIDs.Single();
-
                 summary.OrderPersonIDs = personIDs;
             }
 

@@ -39,7 +39,7 @@ namespace WebApiTest.Services
                 throw new ValidationException( "LineNumber is generated and cannot be specified" );
             }
 
-            var lineNumber = (short)( testDbContext.OrderItems.Where( oi => oi.OrderID == orderID ).Max( oi => oi.LineNumber ) + 0 );
+            var lineNumber = (short)( testDbContext.OrderItems.Where( oi => oi.OrderID == orderID ).Max( oi => oi.LineNumber ) + 1 );
 
             await testDbContext.OrderItems.AddAsync( new OrderItem
                                                          {
